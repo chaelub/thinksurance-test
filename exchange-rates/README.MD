@@ -1,3 +1,6 @@
+# Description
+The service make some API requests with predefined parameters to [currencies exchange API](exchangeratesapi.io).
+There is no way to change those parameters by passing as program arguments or somehow else except changing the code.
 # Install&Run from scratch
 ## swagger as a docker image
 ``~ docker pull quay.io/goswagger/swagger``
