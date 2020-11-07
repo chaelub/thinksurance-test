@@ -1,0 +1,97 @@
+swagger: "2.0"
+info:
+  title: 'ExchangeRates'
+  version: '0.0.1'
+
+host: 'api.exchangeratesapi.io'
+schemes:
+    - 'https'
+paths:
+  /latest:
+    get:
+      summary: 'Returns the latest foreign exchange reference rates'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'query'
+          name: 'base'
+          type: 'string'
+          description: 'Currency code ex: EUR'
+        - in: 'query'
+          name: 'symbols'
+          type: 'array'
+          items:
+            type: 'string'
+      responses:
+        200:
+          description: 'an object with exchange rates'
+          schema:
+            $ref: '#/definitions/Rates'
+  /history:
+    get:
+      summary: 'Returns the historical exchange rates'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'query'
+          name: 'start_at'
+          type: 'string'
+          format: 'date'
+        - in: 'query'
+          name: 'end_at'
+          type: 'string'
+          format: 'date'
+        - in: 'query'
+          name: 'symbols'
+          type: 'array'
+          items:
+            type: 'string'
+        - in: 'query'
+          name: 'base'
+          type: 'string'
+          description: 'Currency code ex: EUR'
+      responses:
+        200:
+          description: 'an object with exchange rates'
+          schema:
+            $ref: '#/definitions/Rates'
+
+  /{date}:
+    get:
+      summary: 'Returns the historical exchange for given date'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'date'
+          type: 'string'
+          format: 'date'
+          required: true
+      responses:
+        200:
+          description: 'an object with exchange rates'
+          schema:
+            $ref: '#/definitions/Rates'
+
+definitions:
+  Rates:
+    type: 'object'
+    properties:
+      rates:
+        type: 'object'
+        example: '{"HUF":359.02}'
+      base:
+        type: 'string'
+        example: 'EUR'
+      date:
+        type: 'string'
+        format: 'date'
+        example: '2020-11-07'
+
+# for some reasons references to params doesn't works =(
+#  parameters:
+#  Base:
+#    in: 'query'
+#    name: 'base'
+#    type: 'string'
+#    description: 'Currency code ex: EUR'
