@@ -1,0 +1,7 @@
+[migrations]
+    dir = "file://migrations"
+[httpInterface]
+    port = ":3009"
+[dbStore]
+    driver = "postgres"
+    dsn = "postgres://admin:secret@localhost:9429/sp_db?sslmode=disable"

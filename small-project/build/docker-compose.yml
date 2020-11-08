@@ -1,0 +1,24 @@
+version: '3.4'
+
+volumes:
+  sp_db:
+    driver: local
+
+services:
+  sp_db:
+    container_name: sp_db
+    build:
+      dockerfile: ./Dockerfile
+      context: ./psql
+    ports:
+      - "9429:5432"
+    environment:
+      POSTGRES_PASSWORD: "secret"
+      POSTGRES_USER: "admin"
+    volumes:
+      - sp_db:/var/lib/postgresql/small_project_db
+    logging:
+      options:
+        max-size: "50m"
+        max-file: "2"
+
