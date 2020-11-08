@@ -48,6 +48,8 @@ func RunServer(conf HTTPServerConfig, userStore user.UserStoreI, roleRepo role.R
 			return
 		}
 
+		// todo: validate request
+
 		user, err := userStore.GetByLogin(lr.Login)
 		if err != nil {
 			sendResponse(w, http.StatusInternalServerError, nil, err)
