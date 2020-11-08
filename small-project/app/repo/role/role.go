@@ -29,7 +29,6 @@ func (s *dbRoleRepo) GetRoleById(id int64) (models.Role, error) {
 }
 
 func NewDBRoleRepo(db *sql.DB) role.RoleRepoI {
-	// todo: check migrations
 	return &dbRoleRepo{
 		db: db,
 	}

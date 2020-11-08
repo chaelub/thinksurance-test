@@ -20,13 +20,6 @@ import (
 	"os"
 )
 
-/*
-TODO:
-	- fetch users/roles/perm from DB
-	- role->perm store with cache
-	- don't place DBStoreConf in Interface folder
-*/
-
 type Config struct {
 	Migrations struct {
 		Dir string `toml:"dir"`

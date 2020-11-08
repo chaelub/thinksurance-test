@@ -18,12 +18,13 @@ func (s *dbUserRepo) GetUserByLogin(login string) (models.User, error) {
 }
 
 func (s *dbUserRepo) GetUserById(id int64) (models.User, error) {
-	s.db.Query("")
-	return models.User{}, nil
+	row := s.db.QueryRow(userByIDWithRole, id)
+
+	var u models.User
+	return u, row.Scan(&u.Id, &u.Login, &u.Password, &u.RoleId)
 }
 
 func NewDBUserRepo(db *sql.DB) user.UserRepoI {
-	// todo: check migrations
 	return &dbUserRepo{
 		db: db,
 	}
